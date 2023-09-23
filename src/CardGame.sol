@@ -105,15 +105,15 @@ contract CardGame is ERC721, ERC721Burnable, Ownable {
         return cards[prints[tokenId]];
     }
 
+    // ERC721 related functions
     function setBaseURI(string memory uri) public onlyOwner {
         _setBaseURI(uri);
     }
 
-    // ERC721 related functions
     function tokenURI(
         uint256 tokenId
     ) public view override returns (string memory) {
-        super._requireMinted(tokenId);
+        super._exists(tokenId);
         uint256 cardId = prints[tokenId];
         return string(abi.encodePacked(_baseURI(), cardId));
     }
